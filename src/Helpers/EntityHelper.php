@@ -6,9 +6,9 @@ use ReflectionClass;
 use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCore\Code\Helpers\PropertyHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnDomain\Entity\Factories\PropertyAccess;
 use ZnCore\Instance\Helpers\ClassHelper;
 use ZnCore\Text\Helpers\Inflector;
+//use ZnDomain\Entity\Factories\PropertyAccess;
 use ZnLib\Components\DynamicEntity\Interfaces\DynamicEntityAttributesInterface;
 
 class EntityHelper
@@ -58,9 +58,10 @@ class EntityHelper
         } elseif (is_object($entity)) {
             $attributes = self::getAttributeNames($entity);
             if ($attributes) {
-                $propertyAccessor = PropertyAccess::createPropertyAccessor();
+//                $propertyAccessor = PropertyAccess::createPropertyAccessor();
                 foreach ($attributes as $attribute) {
-                    $array[$attribute] = $propertyAccessor->getValue($entity, $attribute);
+                    $array[$attribute] = PropertyHelper::getValue($entity, $attribute);
+//                    $array[$attribute] = $propertyAccessor->getValue($entity, $attribute);
                 }
             } else {
                 $array = (array)$entity;
@@ -111,7 +112,7 @@ class EntityHelper
         PropertyHelper::setAttributes($toObject, $entityAttributes);
     }
 
-    public static function setAttributes(object $entity, $data, array $filedsOnly = []): void
+    /*public static function setAttributes(object $entity, $data, array $filedsOnly = []): void
     {
         if (empty($data)) {
             return;
@@ -133,5 +134,5 @@ class EntityHelper
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         return $propertyAccessor->getValue($entity, $key);
-    }
+    }*/
 }
