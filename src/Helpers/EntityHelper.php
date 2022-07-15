@@ -8,7 +8,7 @@ use ZnCore\Code\Helpers\PropertyHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnCore\Instance\Helpers\ClassHelper;
 use ZnCore\Text\Helpers\Inflector;
-//use ZnDomain\Entity\Factories\PropertyAccess;
+//use ZnCore\Code\Factories\PropertyAccess;
 use ZnLib\Components\DynamicEntity\Interfaces\DynamicEntityAttributesInterface;
 
 class EntityHelper
