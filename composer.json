@@ -10,7 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    
+    "symfony/property-access": "4.*|5.*"
   },
   "autoload": {
     "psr-4": {
