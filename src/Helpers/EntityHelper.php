@@ -4,6 +4,7 @@ namespace ZnDomain\Entity\Helpers;
 
 use ReflectionClass;
 use ZnCore\Arr\Helpers\ArrayHelper;
+use ZnCore\Code\Helpers\PropertyHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnDomain\Entity\Factories\PropertyAccess;
 use ZnCore\Instance\Helpers\ClassHelper;
@@ -13,17 +14,17 @@ use ZnLib\Components\DynamicEntity\Interfaces\DynamicEntityAttributesInterface;
 class EntityHelper
 {
 
-    public static function getValue(object $enitity, string $attribute)
+    /*public static function getValue(object $enitity, string $attribute)
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         return $propertyAccessor->getValue($enitity, $attribute);
-    }
+    }*/
 
     public static function createEntity(string $entityClass, $attributes = [])
     {
         $entityInstance = ClassHelper::createObject($entityClass);
         if ($attributes) {
-            self::setAttributes($entityInstance, $attributes);
+            PropertyHelper::setAttributes($entityInstance, $attributes);
         }
         return $entityInstance;
     }
@@ -97,29 +98,17 @@ class EntityHelper
         return $attributes;
     }
 
-    public static function isWritableAttribute(object $entity, string $name): bool
-    {
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        return $propertyAccessor->isWritable($entity, $name);
-    }
-
-    public static function isReadableAttribute(object $entity, string $name): bool
-    {
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        return $propertyAccessor->isReadable($entity, $name);
-    }
-
-    public static function setAttribute(object $entity, string $name, $value): void
+    /*public static function setAttribute(object $entity, string $name, $value): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $propertyAccessor->setValue($entity, $name, $value);
-    }
+    }*/
 
     public static function setAttributesFromObject(object $fromObject, object $toObject): void
     {
         $entityAttributes = self::toArray($fromObject);
         $entityAttributes = ArrayHelper::extractByKeys($entityAttributes, self::getAttributeNames($toObject));
-        self::setAttributes($toObject, $entityAttributes);
+        PropertyHelper::setAttributes($toObject, $entityAttributes);
     }
 
     public static function setAttributes(object $entity, $data, array $filedsOnly = []): void

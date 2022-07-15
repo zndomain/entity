@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use ZnCore\Code\Helpers\PropertyHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnCore\Collection\Libs\Collection;
 use ZnDomain\Entity\Factories\PropertyAccess;
@@ -98,7 +99,7 @@ class CollectionHelper
     {
         foreach ($data as $key => $item) {
             $entity = new $entityClass;
-            EntityHelper::setAttributes($entity, $item, $filedsOnly);
+            PropertyHelper::setAttributes($entity, $item, $filedsOnly);
             $data[$key] = $entity;
         }
         $collection = new Collection($data);
